@@ -1,0 +1,11 @@
+# extract all urls from a text file
+cat file.txt | egrep -o 'https?://[^ ]+' | sed -e 's/https/http/g' |  sed -e 's/\W+$//g' | sort | uniq -c | sort -bnr
+
+# extraxt domains from URL's found in text files
+cat file.txt | egrep -o 'https?://[^ ]+' | sed -e 's/https/http/g' |  sed -e 's/\W+$//g' | sed -e 's/http:\/\///g' | sed -e 's/\/.*$//g' | sort | uniq -c | sort -bnr
+
+# extract email addresses
+cat file.txt | grep -i -o '[A-Z0-9._%+-]\+@[A-Z0-9.-]\+\.[A-Z]\{2,4\}' | sort | uniq -c | sort -bnr
+
+# list all words in a text file
+cat file.txt | tr '[:space:]' '[\n*]' | grep -v "^\s*$" | sort | uniq -c | sort -bnr
